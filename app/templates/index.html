@@ -1,0 +1,25 @@
+<h1>Crazy Coders</h1>
+<div id="container">
+	<p>Look at all the movies we have today</p>
+	<button (click)="mouseClickedMe($event)"> Hey I was clicked {{times}} times</button>
+	
+	<div *ngIf="premiumAccount">You are not authorised to see these options</div>
+	
+	<div id="myMovieList" class="clear">
+			<div class="movieItem {{movie.name.split(' ').join('')}}" *ngFor="#movie of movieList;" [class.selected]="movie === selectedMovie" (click)="selectMovie(movie)">{{movie.name}}</div>
+	</div>
+	<br>
+
+	<movie-detail [selectedMovie]="selectedMovie"></movie-detail>
+	<br>
+	<button (click)="acceptMovie(selectedMovie)"> Accept </button>
+    <button (click)="rejectMovie(selectedMovie)"> Reject </button>
+	<br>
+	<a [routerLink]="['MyFirstCart']">My Cart</a>
+	<!--<div id="cart">
+		<h3> Cart: </h3>
+		<ul>
+			<li *ngFor="#cartItem of cart"> {{cartItem}}</li>
+		</ul>
+	</div>-->
+</div>

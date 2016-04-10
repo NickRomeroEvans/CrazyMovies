@@ -1,0 +1,58 @@
+*{
+	margin: 0
+	padding : 0
+}
+
+h1{
+	text-align: center;
+	padding: 40px 0;
+	border-bottom 2px solid #eee;
+	background: black;
+	color: white;
+	text-shadow: 0 0 5px white;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+h3 {
+	padding-top: 24px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #8C8C8C;
+}
+
+.clear:after{
+	content:'';
+	display: block;
+	clear: both;
+}
+
+.movieItem{
+	width: 33%;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	height: 150px;
+	width: 125px;
+}
+
+.BatmanvsSuperman{
+	color: white;
+	background: url('./app/images/bvs.jpg');
+
+}
+
+.CivilWar{
+	background: url('./app/images/civwar.jpg');
+}
+
+.Deadpool{
+	background: url('./app/images/deadpool.jpg');
+}
+
+.Zootopia{
+	color: white;
+	background: url('./app/images/zootopia.jpg');
+}
