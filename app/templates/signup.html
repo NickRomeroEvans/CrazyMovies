@@ -1,9 +1,13 @@
 <div class="signup center-block jumbotron">
   <h1>Signup</h1>
-	<form role="form" (submit)="signup($event, username.value, password.value)">
+	<form role="form" (submit)="signup($event, username.value, password.value, email.value)">
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input type="text" #username class="form-control" id="username" placeholder="Username">
+		</div>
+		<div class="form-group">
+			<label for="username">Email</label>
+			<input type="text" #email class="form-control" id="email" placeholder="Email">
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
@@ -12,4 +16,6 @@
 		<button type="submit" class="btn btn-default">Submit</button>
 		<a href="/login">Click here to Login</a>
 	</form>
+	
+
 </div>

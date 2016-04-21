@@ -1,6 +1,5 @@
 import { Directive, Attribute, ElementRef, DynamicComponentLoader } from 'angular2/core';
 import { Router, RouterOutlet, ComponentInstruction } from 'angular2/router';
-import { loginComponent } from './component.login';
 
 @Directive({
   selector: 'router-outlet'
@@ -17,16 +16,17 @@ export class LoggedInRouterOutlet extends RouterOutlet {
     // The Boolean following each route below denotes whether the route requires authentication to view
     this.publicRoutes = {
       'login': true,
-      'signup': true
+      'signup': true,
+	  'oldLogin': true
     };
   }
 
   activate(instruction: ComponentInstruction) {
     let url = instruction.urlPath;
-    if (!this.publicRoutes[url] && !localStorage.getItem('jwt')) {
+    /*if (!this.publicRoutes[url] && !localStorage.getItem('jwt')) {
       // todo: redirect to Login, may be there a better way?
-      this.parentRouter.navigateByUrl('/login');
-    }
+      this.parentRouter.navigateByUrl('/oldLogin');
+    }*/
     return super.activate(instruction);
   }
 }

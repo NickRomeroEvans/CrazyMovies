@@ -7,38 +7,28 @@ import { MovieService } from './movie.service';
 	selector: 'movie-detail',
 	template: `
 	<div *ngIf="selectedMovie">
-      <h2>{{selectedMovie.name}} details!</h2>
+      <h2>{{selectedMovie.title}} details!</h2>
       <div><label>id: </label>{{selectedMovie.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedMovie.name" placeholder="name"/>
-      </div>
+      <div><label>Title: </label>{{selectedMovie.title}}</div>
     </div>
-	<button (click)="goBack()">Back </button>
 	`
 })
-export class MovieDetailComponent{
+export class MovieDetailComponent {
 	@Input()
 	selectedMovie: Movie;
-	
+
 	constructor(
 		private _movieService: MovieService,
 		private _routeParams: RouteParams) {
 	}
-	
-	ngOnInit(){
+
+	ngOnInit() {
 		let id = +this._routeParams.get('id');
-		this._movieService.getMovieById(id)
-		  .then(movie => this.selectedMovie = movie);
+		console.log(id + ' Movie Detail');
 	}
-	
+
 	goBack() {
 		window.history.back();
 	}
-	/*
-	  
-	  
 
-
-*/
 }

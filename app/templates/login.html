@@ -12,4 +12,10 @@
 		<button type="submit" class="btn btn-default"> Submit </button>
 		<a href="/signup">Click here to Signup</a>
 	</form>
+	
+	<ul>
+		<li *ngIf="loggedIn()" [class.active]="isActive('/home')"><a [routerLink]="['/home']">Profile</a></li>
+        <li><a href="#" *ngIf="!loggedIn()" (click)="newLogin()">Login</a></li>
+        <li><a href="#" *ngIf="loggedIn()" (click)="logout()">Logout</a></li>
+	</ul>
 </div>

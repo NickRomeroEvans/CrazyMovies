@@ -5,65 +5,47 @@ import {MovieService} from './movie.service';
 import {MovieDetailComponent} from './component.movie-detail';
 
 @Component({
-    templateUrl: `./app/templates/index.html`, 
+    templateUrl: `./app/templates/index.html`,
 	styleUrls: ['./app/css/myShopComponent.css'],
-	directives: [MovieDetailComponent, ROUTER_DIRECTIVES]
+	directives: [ MovieDetailComponent, ROUTER_DIRECTIVES]
 })
-// Make cart keep track of amount in cart
-export class homeComponent implements OnInit {
-	public cartIndex = [];
-	public rejectIndex = [];
-	name = "Nick Evans";
-	times = 0;
-	premiumAccount = false;
+
+export class HomeComponent implements OnInit {
 	public selectedMovie : Movie;
-	
+
 	public movieList : Movie[] = [];
-	
-	mouseClickedMe(event){
-		this.times++;
-	}
-	
+
 	constructor(private _movieService: MovieService, private _router: Router) { }
-	
-	getMovies(){
-		this._movieService.getMovies().then(movies => this.movieList = movies);
+
+	// Get all movies that the user hasn't marked
+	getMovies() {
+		this._movieService.getQueueMovies().then(movies => {
+			this.movieList = movies;
+			if (this.movieList.length > 0) {
+				this.selectedMovie = this.movieList[0];
+			}
+		});
 	}
-	
-	ngOnInit(){
+
+	ngOnInit() {
 		this.getMovies();
 	}
-	
-	selectMovie(movie : Movie){
-		console.log(movie.name + " was selected");
+
+	selectMovie(movie : Movie) {
+		console.log(movie.title + ' was selected');
 		this.selectedMovie = movie;
 	}
-	
-	gotoDetail(movie: Movie) {
-		let link = ['MovieDetail', { id: movie.id }];
-		this._router.navigate(link);
+
+	noticeMovie(movie : Movie, notice: string) {
+		if (this.movieList.length > 0) {
+			this._movieService.addNotice(movie, notice);
+			this.movieList.splice(0, 1);
+			if (this.movieList.length > 0) {
+				this.selectedMovie = this.movieList[0];
+			} else {
+				this.selectedMovie = null;
+			}
+		}
 	}
-	
-	acceptMovie(movie : Movie){
-		this._movieService.addAccepted(movie);
-	}
-	
-	rejectMovie(movie : Movie){
-		this._movieService.addRejected(movie);
-	}
-	
-	/* // TODO: Add User id to acceptMovie
-	acceptMovie(movie : Movie){
-		console.log(movie.name + " was accepted");
-		this.cartIndex.push(movie.name);
-		localStorage.cartItems = JSON.stringify(this.cartIndex);
-	}
-	
-		// TODO: Add User id to acceptMovie
-	rejectMovie(movie : Movie){
-		console.log(movie.name + " was rejected");
-		this.rejectIndex.push(movie.name);
-		console.log(this.rejectIndex);
-		localStorage.rejectItems = JSON.stringify(this.rejectIndex);
-	}*/
+
 }
