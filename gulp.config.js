@@ -1,5 +1,6 @@
 module.exports = function(){
 	var outputDir = '../CrazyMovies/src/main/webapp';
+
 	var config = {
 		allTs: './app/**/*.ts',
 		typings: './typings/**/*.d.ts',
